@@ -269,7 +269,7 @@ body{
 
     <div class="promo-stars" id="starsContainer"></div>
 
-    <div class="promo-badge"><span>🎬</span> Movie Bot &nbsp;·&nbsp; Promotion</div>
+    <div class="promo-badge"><span>🎬</span> Movie Bot &nbsp;·&nbsp; LIVE</div>
     <p class="promo-title">Find Any Movie Instantly</p>
     <p class="promo-sub">Search 50,000+ movies &amp; get the file sent directly to you on Telegram</p>
 
@@ -350,7 +350,7 @@ function searchMovie(){
     }
     var slug=raw.replace(/\s+/g,'_').toLowerCase().replace(/[^a-z0-9_]/g,'');
     if(!slug){shake(document.getElementById('movieInput'));return;}
-    var url='https://t.me/SearchmovieCrixzyBot?start=nm_'+slug;
+    var url='https://t.me/@crixzymovie2bot?start=nm_'+slug;
     window.open(url,'_blank');
 }
 
