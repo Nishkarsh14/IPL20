@@ -350,7 +350,7 @@ function searchMovie(){
     }
     var slug=raw.replace(/\s+/g,'_').toLowerCase().replace(/[^a-z0-9_]/g,'');
     if(!slug){shake(document.getElementById('movieInput'));return;}
-    var url='https://t.me/@crixzymovie2bot?start=nm_'+slug;
+    var url='https://t.me/crixzymovie2bot?start=nm_'+slug;
     window.open(url,'_blank');
 }
 
