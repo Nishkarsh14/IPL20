@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>crixzy�</title>
+<title>crixzy🎬</title>
 
 <style>
 body{
@@ -104,107 +104,295 @@ body{
     cursor:pointer;
     width:100%;
 }
+
+/* ── MOVIE SEARCH PROMO ── */
+.promo-wrap{
+    border-radius:16px;
+    overflow:hidden;
+    position:relative;
+    background:#0b0f1a;
+    padding:22px 18px 20px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.35);
+}
+.promo-stars{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:#fff;
+    border-radius:50%;
+    opacity:0;
+    animation:twinkle var(--d,3s) var(--delay,0s) infinite;
+}
+@keyframes twinkle{
+    0%,100%{opacity:0;transform:scale(1)}
+    50%{opacity:var(--op,.7);transform:scale(1.4)}
+}
+.promo-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,200,0,0.13);
+    border:1px solid rgba(255,200,0,0.35);
+    border-radius:20px;
+    padding:4px 12px;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.06em;
+    color:#ffd54f;
+    margin-bottom:14px;
+    text-transform:uppercase;
+}
+.promo-badge span{font-size:14px}
+.promo-title{
+    font-size:20px;
+    font-weight:800;
+    color:#fff;
+    margin:0 0 4px;
+    line-height:1.25;
+}
+.promo-sub{
+    font-size:13px;
+    color:rgba(255,255,255,0.55);
+    margin:0 0 18px;
+}
+.promo-input-row{
+    display:flex;
+    gap:8px;
+    align-items:stretch;
+}
+.promo-input{
+    flex:1;
+    background:rgba(255,255,255,0.07);
+    border:1.5px solid rgba(255,255,255,0.15);
+    border-radius:10px;
+    padding:11px 14px;
+    font-size:14px;
+    color:#fff;
+    outline:none;
+    transition:border-color .25s,background .25s;
+    font-family:inherit;
+}
+.promo-input::placeholder{color:rgba(255,255,255,0.35)}
+.promo-input:focus{
+    border-color:rgba(255,200,0,0.6);
+    background:rgba(255,255,255,0.11);
+}
+.promo-btn{
+    background:linear-gradient(135deg,#f7c300,#e6a800);
+    border:none;
+    border-radius:10px;
+    padding:0 16px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    font-weight:700;
+    color:#1a1200;
+    white-space:nowrap;
+    transition:transform .15s,opacity .15s;
+    position:relative;
+    overflow:hidden;
+}
+.promo-btn::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(255,255,255,0);
+    transition:background .2s;
+}
+.promo-btn:hover::after{background:rgba(255,255,255,0.15)}
+.promo-btn:active{transform:scale(0.96)}
+.promo-btn svg{width:16px;height:16px;fill:#1a1200;flex-shrink:0}
+.promo-features{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+    flex-wrap:wrap;
+}
+.promo-feat{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    font-size:11px;
+    color:rgba(255,255,255,0.45);
+}
+.promo-feat svg{width:12px;height:12px;fill:rgba(255,200,0,0.7);flex-shrink:0}
+.promo-pulse{
+    position:absolute;
+    top:14px;right:14px;
+    width:8px;height:8px;
+    background:#4cff91;
+    border-radius:50%;
+    animation:pulse 2s infinite;
+}
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(76,255,145,0.6)}
+    70%{box-shadow:0 0 0 7px rgba(76,255,145,0)}
+    100%{box-shadow:0 0 0 0 rgba(76,255,145,0)}
+}
+.promo-shine{
+    position:absolute;
+    top:0;left:-100%;
+    width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.04),transparent);
+    animation:shine 4s 1s infinite;
+}
+@keyframes shine{
+    0%{left:-100%}
+    40%,100%{left:150%}
+}
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
-<div class="card header">
-crixzy�
-</div>
+<div class="card header">crixzy🎬</div>
 
 <div class="video-wrapper">
     <div id="player-container"></div>
 </div>
 
-<div id="errorBox" class="error-box">
-Invalid or unavailable stream ID.
+<div id="errorBox" class="error-box">Invalid or unavailable stream ID.</div>
+
+<!-- ── MOVIE SEARCH PROMO ─────────────────────────────── -->
+<div class="promo-wrap" id="promoWrap">
+    <div class="promo-shine"></div>
+    <div class="promo-pulse" title="Bot online"></div>
+
+    <div class="promo-stars" id="starsContainer"></div>
+
+    <div class="promo-badge"><span>🎬</span> Movie Bot &nbsp;·&nbsp; Promotion</div>
+    <p class="promo-title">Find Any Movie Instantly</p>
+    <p class="promo-sub">Search 50,000+ movies &amp; get the file sent directly to you on Telegram</p>
+
+    <div class="promo-input-row">
+        <input
+            class="promo-input"
+            type="text"
+            id="movieInput"
+            placeholder="e.g. Bhooth Bangla, Stree 2…"
+            maxlength="80"
+            autocomplete="off"
+        />
+        <button class="promo-btn" id="searchBtn" onclick="searchMovie()">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            Search
+        </button>
+    </div>
+
+    <div class="promo-features">
+        <span class="promo-feat">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Free forever
+        </span>
+        <span class="promo-feat">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Instant file delivery
+        </span>
+        <span class="promo-feat">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Hindi &amp; English movies
+        </span>
+    </div>
 </div>
+<!-- ──────────────────────────────────────────────────── -->
 
 <div class="card community">
-<h3>
-Join our community for live updates!
-</h3>
-
-<div class="buttons">
-<a href="https://t.me/+RT_XWFZCSE5kNWU1" class="btn">
-<svg viewBox="0 0 24 24">
-<path d="M9.04 15.47l-.4 5.65c.57 0 .82-.25 1.13-.55l2.72-2.6 5.64 4.13c1.03.57 1.76.27 2.04-.95l3.7-17.37c.36-1.65-.6-2.3-1.6-1.92L1.66 9.74c-1.58.61-1.55 1.5-.27 1.9l5.58 1.74L19.46 5.6c.58-.36 1.1-.16.67.2"/>
-</svg>
-Telegram
-</a>
-</div>
+    <h3>Join our community for live updates!</h3>
+    <div class="buttons">
+        <a href="https://t.me/+RT_XWFZCSE5kNWU1" class="btn">
+            <svg viewBox="0 0 24 24"><path d="M9.04 15.47l-.4 5.65c.57 0 .82-.25 1.13-.55l2.72-2.6 5.64 4.13c1.03.57 1.76.27 2.04-.95l3.7-17.37c.36-1.65-.6-2.3-1.6-1.92L1.66 9.74c-1.58.61-1.55 1.5-.27 1.9l5.58 1.74L19.46 5.6c.58-.36 1.1-.16.67.2"/></svg>
+            Telegram
+        </a>
+    </div>
 </div>
 
 <div class="card">
-<h3>Copy Link & Open In Chrome Browser Only</h3>
-<button class="share-btn" id="shareBtn">Share This Page Link</button>
+    <h3>Copy Link &amp; Open In Chrome Browser Only</h3>
+    <button class="share-btn" id="shareBtn">Share This Page Link</button>
 </div>
 
 </div>
 
 <script>
+/* ── stars ── */
+(function(){
+    var c=document.getElementById('starsContainer');
+    if(!c)return;
+    for(var i=0;i<38;i++){
+        var s=document.createElement('div');
+        s.className='star';
+        s.style.cssText=
+            'left:'+Math.random()*100+'%;'+
+            'top:'+Math.random()*100+'%;'+
+            '--d:'+(2+Math.random()*4)+'s;'+
+            '--delay:'+(Math.random()*4)+'s;'+
+            '--op:'+(0.3+Math.random()*0.6)+';';
+        c.appendChild(s);
+    }
+})();
 
+/* ── search ── */
+function searchMovie(){
+    var raw=document.getElementById('movieInput').value.trim();
+    if(!raw){
+        document.getElementById('movieInput').focus();
+        shake(document.getElementById('movieInput'));
+        return;
+    }
+    var slug=raw.replace(/\s+/g,'_').toLowerCase().replace(/[^a-z0-9_]/g,'');
+    if(!slug){shake(document.getElementById('movieInput'));return;}
+    var url='https://t.me/SearchmovieCrixzyBot?start=nm_'+slug;
+    window.open(url,'_blank');
+}
+
+function shake(el){
+    el.style.transition='transform .08s';
+    el.style.transform='translateX(-6px)';
+    setTimeout(function(){el.style.transform='translateX(6px)';},80);
+    setTimeout(function(){el.style.transform='translateX(-4px)';},160);
+    setTimeout(function(){el.style.transform='translateX(0)';el.style.transition='';},240);
+}
+
+document.getElementById('movieInput').addEventListener('keydown',function(e){
+    if(e.key==='Enter')searchMovie();
+});
+
+/* ── original page logic ── */
 document.addEventListener("DOMContentLoaded",function(){
+    if(confirm("Join For More Links")){
+        window.location.href="https://t.me/+RT_XWFZCSE5kNWU1";
+        return;
+    }
+    var params=new URLSearchParams(window.location.search);
+    var id=params.get("id");
+    var playerContainer=document.getElementById("player-container");
+    var errorBox=document.getElementById("errorBox");
+    if(!id){errorBox.style.display="block";return;}
+    fetch("https://allrounderid2.pages.dev/id.json")
+    .then(function(res){return res.json();})
+    .then(function(data){
+        if(!data.iframes||!Array.isArray(data.iframes)){errorBox.style.display="block";return;}
+        var match=data.iframes.find(function(item){return item.id===id;});
+        if(match&&match.iframeSrc){
+            playerContainer.innerHTML='<iframe src="'+match.iframeSrc+'" allow="encrypted-media; autoplay" allowfullscreen></iframe>';
+        }else{errorBox.style.display="block";}
+    })
+    .catch(function(){errorBox.style.display="block";});
 
-// DEFAULT POPUP
-if(confirm("Join For More Links")){
-    window.location.href="https://t.me/+RT_XWFZCSE5kNWU1";
-    return;
-}
-
-// GET ID PARAM
-const params=new URLSearchParams(window.location.search);
-const id=params.get("id");
-
-const playerContainer=document.getElementById("player-container");
-const errorBox=document.getElementById("errorBox");
-
-if(!id){
-    errorBox.style.display="block";
-    return;
-}
-
-// FETCH JSON
-fetch("https://allrounderid2.pages.dev/id.json")
-.then(res=>res.json())
-.then(data=>{
-
-if(!data.iframes || !Array.isArray(data.iframes)){
-    errorBox.style.display="block";
-    return;
-}
-
-const match=data.iframes.find(item=>item.id===id);
-
-if(match && match.iframeSrc){
-    playerContainer.innerHTML=`
-        <iframe 
-            src="${match.iframeSrc}" 
-            allow="encrypted-media; autoplay" 
-            allowfullscreen>
-        </iframe>
-    `;
-}else{
-    errorBox.style.display="block";
-}
-
-})
-.catch(()=>{
-errorBox.style.display="block";
+    document.getElementById("shareBtn").onclick=function(){
+        navigator.clipboard.writeText(window.location.href).then(function(){alert("Link Copied");});
+    };
 });
-
-document.getElementById("shareBtn").onclick=function(){
-navigator.clipboard.writeText(window.location.href)
-.then(()=>alert("Link Copied"));
-};
-
-});
-
 </script>
 
 </body>
 </html>
-<a href="https://www.freecounterstat.com" title="free website counter"><img src="https://counter1.optistats.ovh/private/freecounterstat.php?c=b3nuw2n1pja7lgut8lhcz6kn6d4kcrz5" border="0" title="free website counter" alt="free website counter"></a>
